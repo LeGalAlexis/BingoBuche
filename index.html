@@ -1,0 +1,100 @@
+<html>
+    <head>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="./style.css" />
+        <script src="https://kit.fontawesome.com/92c9b58fa8.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="cell cell-0">test</div>
+            <div class="cell cell-1">test</div>
+            <div class="cell cell-2">test</div>
+            <div class="cell cell-3">test</div>
+            <div class="cell cell-4">test</div>
+            <div class="cell cell-5">test</div>
+            <div class="cell cell-6">test</div>
+            <div class="cell cell-7">test</div>
+            <div class="cell cell-8">test</div>
+            <div class="cell cell-9">test</div>
+            <div class="cell cell-10">test</div>
+            <div class="cell cell-11">test</div>
+            <div class="cell cell-12">test</div>
+            <div class="cell cell-13">test</div>
+            <div class="cell cell-14">test</div>
+            <div class="cell cell-15">test</div>
+            <div class="cell cell-16">test</div>
+            <div class="cell cell-17">test</div>
+            <div class="cell cell-18">test</div>
+            <div class="cell cell-19">test</div>
+            <div class="cell cell-20">test</div>
+            <div class="cell cell-21">test</div>
+            <div class="cell cell-22">test</div>
+            <div class="cell cell-23">test</div>
+            <div class="cell cell-24">test</div>
+        </div>
+        <button id="shuffle">Creer un nouveau bingo</button>
+        <script>
+            let cells = ["ça ken SALE", 
+                "musique trop épique", 
+                "animal en voie de disparition",
+                "timelapse nuages",
+                "combat contre les éléments",
+                "slowmo inutile",
+                "\"La nature reprend ses droits\"",
+                "\"entre modernité et tradition\"\"terres de contrastes\" etc",
+                "baston pour la dominance",
+                "parade nuptiale cheulou",
+                "bébé animal mignon",
+                "plan drone",
+                "FREE SPACE",
+                "licence poétique approximative",
+                "harmonie / osmose",
+                "wazo = liberté",
+                "volcans / plaques tectoniques 3D",
+                "sous-titres: bruit d'eau = applaudissements",
+                "l'eau, bien le plus précieux",
+                "mise en scene pseudo historique",
+                "le problème c'est nous",
+                "animal mignon se fait manger par un prédateur",
+                "métaphore filée claquée au sol",
+                "\"nature impitoyable\"",
+                "gros plan carcasse"];
+
+            function shuffle(array) {
+                let currentIndex = array.length,  randomIndex;
+
+                // While there remain elements to shuffle...
+                while (currentIndex != 0) {
+
+                    // Pick a remaining element...
+                    randomIndex = Math.floor(Math.random() * currentIndex);
+                    currentIndex--;
+
+                    // And swap it with the current element.
+                    [array[currentIndex], array[randomIndex]] = [
+                    array[randomIndex], array[currentIndex]];
+                }
+
+                return array;
+            }
+
+            function setCell(item, index, arr) {
+                $(".cell-"+ index).text(item)
+            } 
+
+            $( document ).ready(function() {
+                shuffle(cells);
+                cells.forEach(setCell);
+            });
+
+            $(".cell").click(function() {
+                $(this).toggleClass('selected');
+            });
+
+            $("#shuffle").click(function() {
+                shuffle(cells);
+                cells.forEach(setCell);
+            });
+        </script>
+    </body>
+</html>
