@@ -11,12 +11,18 @@ html {
     padding: 20px 0;
 }
 
+.title {
+    color: #669491;
+    text-shadow: -10px 0 20px black, 0 10px 20px black, 10px 0 20px black, 0 -10px 20px black;
+}
+
 .container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-gap: 5px;
     width: 48%;
-  }
+}
+
 .cell {
     background-color: #b3a179;
     aspect-ratio: 1;
