@@ -5,36 +5,42 @@
         <script src="https://kit.fontawesome.com/92c9b58fa8.js" crossorigin="anonymous"></script>
     </head>
     <body>
-        <div class="container">
-            <div class="cell cell-0">test</div>
-            <div class="cell cell-1">test</div>
-            <div class="cell cell-2">test</div>
-            <div class="cell cell-3">test</div>
-            <div class="cell cell-4">test</div>
-            <div class="cell cell-5">test</div>
-            <div class="cell cell-6">test</div>
-            <div class="cell cell-7">test</div>
-            <div class="cell cell-8">test</div>
-            <div class="cell cell-9">test</div>
-            <div class="cell cell-10">test</div>
-            <div class="cell cell-11">test</div>
-            <div class="cell cell-12">test</div>
-            <div class="cell cell-13">test</div>
-            <div class="cell cell-14">test</div>
-            <div class="cell cell-15">test</div>
-            <div class="cell cell-16">test</div>
-            <div class="cell cell-17">test</div>
-            <div class="cell cell-18">test</div>
-            <div class="cell cell-19">test</div>
-            <div class="cell cell-20">test</div>
-            <div class="cell cell-21">test</div>
-            <div class="cell cell-22">test</div>
-            <div class="cell cell-23">test</div>
-            <div class="cell cell-24">test</div>
+        <div class="page">
+            <div class="container">
+                <div class="cell cell-0">test</div>
+                <div class="cell cell-1">test</div>
+                <div class="cell cell-2">test</div>
+                <div class="cell cell-3">test</div>
+                <div class="cell cell-4">test</div>
+                <div class="cell cell-5">test</div>
+                <div class="cell cell-6">test</div>
+                <div class="cell cell-7">test</div>
+                <div class="cell cell-8">test</div>
+                <div class="cell cell-9">test</div>
+                <div class="cell cell-10">test</div>
+                <div class="cell cell-11">test</div>
+                <div class="cell cell-12">test</div>
+                <div class="cell cell-13">test</div>
+                <div class="cell cell-14">test</div>
+                <div class="cell cell-15">test</div>
+                <div class="cell cell-16">test</div>
+                <div class="cell cell-17">test</div>
+                <div class="cell cell-18">test</div>
+                <div class="cell cell-19">test</div>
+                <div class="cell cell-20">test</div>
+                <div class="cell cell-21">test</div>
+                <div class="cell cell-22">test</div>
+                <div class="cell cell-23">test</div>
+                <div class="cell cell-24">test</div>
+            </div>
+            <div class="side-panel">
+                <h1>Bingo Buche !</h1>
+                <button onClick="window.location.reload();">Creer un nouveau bingo</button>
+            </div>
         </div>
-        <button id="shuffle">Creer un nouveau bingo</button>
+        
         <script>
-            let cells = ["ça ken SALE", 
+            const cells = ["ça ken SALE", 
                 "musique trop épique", 
                 "animal en voie de disparition",
                 "timelapse nuages",
@@ -46,7 +52,6 @@
                 "parade nuptiale cheulou",
                 "bébé animal mignon",
                 "plan drone",
-                "FREE SPACE",
                 "licence poétique approximative",
                 "harmonie / osmose",
                 "wazo = liberté",
@@ -63,14 +68,14 @@
             function shuffle(array) {
                 let currentIndex = array.length,  randomIndex;
 
-                // While there remain elements to shuffle...
+                // Tant qu'il reste des éléments à mélanger...
                 while (currentIndex != 0) {
 
-                    // Pick a remaining element...
+                    // Prendre un élément au hasard...
                     randomIndex = Math.floor(Math.random() * currentIndex);
                     currentIndex--;
 
-                    // And swap it with the current element.
+                    // Et l'échanger avec l'element actuel.
                     [array[currentIndex], array[randomIndex]] = [
                     array[randomIndex], array[currentIndex]];
                 }
@@ -80,20 +85,45 @@
 
             function setCell(item, index, arr) {
                 $(".cell-"+ index).text(item)
-            } 
+            }
+
+            function setGrid() {
+                let gridCells = [...cells];
+                shuffle(gridCells);
+                gridCells.splice(12, 0, "FREE SPACE");
+                gridCells.forEach(setCell);
+            }
+
+            function isSelected(index) {
+                return $(".cell-"+ index).hasClass("selected")
+            }
+
+            function checkLine(indexesToCheck) {
+                if(indexesToCheck.every(isSelected)) {
+                    indexesToCheck.forEach((item, index, arr) => $(".cell-"+ item).addClass('bingo'))
+                }
+            }
 
             $( document ).ready(function() {
-                shuffle(cells);
-                cells.forEach(setCell);
+                setGrid();
             });
 
             $(".cell").click(function() {
                 $(this).toggleClass('selected');
-            });
+                checkLine([0,1,2,3,4]);
+                checkLine([5,6,7,8,9]);
+                checkLine([10,11,12,13,14]);
+                checkLine([15,16,17,18,19]);
+                checkLine([20,21,22,23,24]);
 
-            $("#shuffle").click(function() {
-                shuffle(cells);
-                cells.forEach(setCell);
+                checkLine([0,5,10,15,20]);
+                checkLine([1,6,11,16,21]);
+                checkLine([2,7,12,17,22]);
+                checkLine([3,8,13,18,23]);
+                checkLine([4,9,14,19,24]);
+
+                checkLine([0,6,12,18,24]);
+                checkLine([4,8,12,16,20]);
             });
         </script>
     </body>

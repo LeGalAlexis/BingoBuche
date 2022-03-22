@@ -1,8 +1,19 @@
+
+.page {
+    display: flex;
+}
+
+.side-panel {
+    text-align: center;
+    width: 51%;
+    padding: 20px 0;
+}
+
 .container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-gap: 5px;
-    width: 50%;
+    width: 48%;
   }
 .cell {
     background-color: grey;
@@ -15,4 +26,8 @@
 
 .cell.selected {
     background-color: lightgreen;
+}
+
+.bingo {
+    background-color: red !important;
 }
