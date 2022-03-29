@@ -16,6 +16,10 @@ html {
     text-shadow: -10px 0 20px black, 0 10px 20px black, 10px 0 20px black, 0 -10px 20px black;
 }
 
+.wazo {
+    width: 200px;
+}
+
 .container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
@@ -47,8 +51,46 @@ html {
     animation: rotate 1s ease 0s 2 alternate;
 }
 
+.pop {
+    animation: fade-in 1s linear 0s 1 both;
+}
+
+.floating {
+    position: absolute;
+    width: 75px;
+}
+
+.bingo-title {
+    position: fixed;
+    top: 250px;
+    font-size: 200px;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    background-color: rgba(255,255,255,0.6);
+}
+
+.rotating {
+    position: relative;
+}
+
+.bingo-txt {
+    display: flex;
+}
+
+.hidden {
+    display: none;
+}
+
 @keyframes rotate {
     0% { transform: rotateY(0deg) scale(1.1, 1.1);}
     70% { transform: rotateY(400deg) scale(1.2, 1.2);}
     100% {transform: rotateY(360deg) scale(1.1, 1.1);}
+}
+
+@keyframes fade-in {
+    from { transform: rotate(1deg) scale(0,0); }
+    50% { transform: rotate(180deg) scale(1,1); }
+    to { transform: rotate(360deg) scale(0,0); }
 }

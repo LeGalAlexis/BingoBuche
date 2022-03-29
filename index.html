@@ -35,11 +35,17 @@
             </div>
             <div class="side-panel">
                 <h1 class="title">Bingo Buche !</h1>
+                <p><img src="./wazotest2_112px.png" alt="wazo" class="wazo" ></p>
                 <button onClick="window.location.reload();">Creer un nouveau bingo</button>
             </div>
         </div>
+        <div id="bingo" class="hidden">
+            <div class="bingo-title"><img src="./bubuchenewsub.gif"><span class="rotating"><span class="bingo-txt">BINGO !!!</span><button onclick="continueBingo()">Continuer</button></span><img src="./bubuchenewsub.gif"></div>
+        </div>
         
         <script>
+            var interval;
+            var hasAnimationBeenTriggered = false;
             const cells = ["ça ken SALE", 
                 "musique trop épique", 
                 "animal en voie de disparition",
@@ -47,9 +53,9 @@
                 "combat contre les éléments",
                 "slowmo inutile",
                 "\"La nature reprend ses droits\"",
-                "\"entre modernité et tradition\"\"terres de contrastes\" etc",
+                "entre tradition & modernité/terre de contrastes etc",
                 "baston pour la dominance",
-                "parade nuptiale cheulou",
+                "parade nuptiale chelou",
                 "bébé animal mignon",
                 "plan drone",
                 "licence poétique approximative",
@@ -98,10 +104,32 @@
                 return $(".cell-"+ index).hasClass("selected")
             }
 
+            function makeItRain() {
+                if(!hasAnimationBeenTriggered) {
+                    interval = self.setInterval(function(){addRandomImage()},50);
+                    $("#bingo").removeClass("hidden");
+                    hasAnimationBeenTriggered = true;
+                }
+            }
+
+            const images = ["buchehap112px.png", "mims2.png", "pipe112px.png", "wazotest2_112px.png" ]
+            function addRandomImage() {
+                let rngImg = Math.floor((Math.random() * 4));
+                let rngX = Math.floor((Math.random() * ($(window).width() - 91)));
+                let rngY = Math.floor((Math.random() * ($(window).height() - 91)));
+                $( "#bingo" ).append(`<img src="./${images[rngImg]}" style="top: ${rngY}px;left: ${rngX}px;" class="floating pop">`);
+            }
+
             function checkLine(indexesToCheck) {
                 if(indexesToCheck.every(isSelected)) {
                     indexesToCheck.forEach((item, index, arr) => $(".cell-"+ item).addClass('bingo'))
+                    makeItRain();
                 }
+            }
+
+            function continueBingo() {
+                clearInterval(interval);
+                $("#bingo").addClass("hidden")
             }
 
             $( document ).ready(function() {
