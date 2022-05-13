@@ -7,45 +7,49 @@
     <body>
         <div class="page">
             <div class="container">
-                <div class="cell cell-0">test</div>
-                <div class="cell cell-1">test</div>
-                <div class="cell cell-2">test</div>
-                <div class="cell cell-3">test</div>
-                <div class="cell cell-4">test</div>
-                <div class="cell cell-5">test</div>
-                <div class="cell cell-6">test</div>
-                <div class="cell cell-7">test</div>
-                <div class="cell cell-8">test</div>
-                <div class="cell cell-9">test</div>
-                <div class="cell cell-10">test</div>
-                <div class="cell cell-11">test</div>
-                <div class="cell cell-12">test</div>
-                <div class="cell cell-13">test</div>
-                <div class="cell cell-14">test</div>
-                <div class="cell cell-15">test</div>
-                <div class="cell cell-16">test</div>
-                <div class="cell cell-17">test</div>
-                <div class="cell cell-18">test</div>
-                <div class="cell cell-19">test</div>
-                <div class="cell cell-20">test</div>
-                <div class="cell cell-21">test</div>
-                <div class="cell cell-22">test</div>
-                <div class="cell cell-23">test</div>
-                <div class="cell cell-24">test</div>
+                <div id="bingo" class="hidden bingo-title"><img src="./bubuchenewsub.gif"><span class="rotating"><span class="bingo-txt">BINGO</span><button onclick="continueBingo()">Continuer</button></span><img src="./bubuchenewsub.gif"></div>
+                <div class="cell" id="c0"><span class="cell-text cell-0">test</span></div>
+                <div class="cell" id="c1"><span class="cell-text cell-1">test</span></div>
+                <div class="cell" id="c2"><span class="cell-text cell-2">test</span></div>
+                <div class="cell" id="c3"><span class="cell-text cell-3">test</span></div>
+                <div class="cell" id="c4"><span class="cell-text cell-4">test</span></div>
+                <div class="cell" id="c5"><span class="cell-text cell-5">test</span></div>
+                <div class="cell" id="c6"><span class="cell-text cell-6">test</span></div>
+                <div class="cell" id="c7"><span class="cell-text cell-7">test</span></div>
+                <div class="cell" id="c8"><span class="cell-text cell-8">test</span></div>
+                <div class="cell" id="c9"><span class="cell-text cell-9">test</span></div>
+                <div class="cell" id="c10"><span class="cell-text cell-10">test</span></div>
+                <div class="cell" id="c11"><span class="cell-text cell-11">test</span></div>
+                <div class="cell" id="c12"><span class="cell-text cell-12">test</span></div>
+                <div class="cell" id="c13"><span class="cell-text cell-13">test</span></div>
+                <div class="cell" id="c14"><span class="cell-text cell-14">test</span></div>
+                <div class="cell" id="c15"><span class="cell-text cell-15">test</span></div>
+                <div class="cell" id="c16"><span class="cell-text cell-16">test</span></div>
+                <div class="cell" id="c17"><span class="cell-text cell-17">test</span></div>
+                <div class="cell" id="c18"><span class="cell-text cell-18">test</span></div>
+                <div class="cell" id="c19"><span class="cell-text cell-19">test</span></div>
+                <div class="cell" id="c20"><span class="cell-text cell-20">test</span></div>
+                <div class="cell" id="c21"><span class="cell-text cell-21">test</span></div>
+                <div class="cell" id="c22"><span class="cell-text cell-22">test</span></div>
+                <div class="cell" id="c23"><span class="cell-text cell-23">test</span></div>
+                <div class="cell" id="c24"><span class="cell-text cell-24">test</span></div>
             </div>
             <div class="side-panel">
                 <h1 class="title">Bingo Buche !</h1>
                 <p><img src="./wazotest2_112px.png" alt="wazo" class="wazo" ></p>
                 <button onClick="window.location.reload();">Creer un nouveau bingo</button>
+                <audio controls id="birdmachine" class="hidden">
+                    <source src="./bird-machine-audio.mp3" type="audio/mp3">
+                    Your browser does not support the audio element.
+                </audio> 
             </div>
         </div>
-        <div id="bingo" class="hidden">
-            <div class="bingo-title"><img src="./bubuchenewsub.gif"><span class="rotating"><span class="bingo-txt">BINGO !!!</span><button onclick="continueBingo()">Continuer</button></span><img src="./bubuchenewsub.gif"></div>
-        </div>
+        <div id="rain"></div>
         
         <script>
             var interval;
             var hasAnimationBeenTriggered = false;
+            var audio = document.getElementById("birdmachine"); 
             const cells = ["ça ken SALE", 
                 "musique trop épique", 
                 "animal en voie de disparition",
@@ -101,13 +105,14 @@
             }
 
             function isSelected(index) {
-                return $(".cell-"+ index).hasClass("selected")
+                return $("#c"+ index).hasClass("selected")
             }
 
             function makeItRain() {
                 if(!hasAnimationBeenTriggered) {
                     interval = self.setInterval(function(){addRandomImage()},50);
                     $("#bingo").removeClass("hidden");
+                    audio.play();
                     hasAnimationBeenTriggered = true;
                 }
             }
@@ -117,19 +122,20 @@
                 let rngImg = Math.floor((Math.random() * 4));
                 let rngX = Math.floor((Math.random() * ($(window).width() - 91)));
                 let rngY = Math.floor((Math.random() * ($(window).height() - 91)));
-                $( "#bingo" ).append(`<img src="./${images[rngImg]}" style="top: ${rngY}px;left: ${rngX}px;" class="floating pop">`);
+                $( "#rain" ).append(`<img src="./${images[rngImg]}" style="top: ${rngY}px;left: ${rngX}px;" class="floating pop">`);
             }
 
             function checkLine(indexesToCheck) {
                 if(indexesToCheck.every(isSelected)) {
-                    indexesToCheck.forEach((item, index, arr) => $(".cell-"+ item).addClass('bingo'))
+                    indexesToCheck.forEach((item, index, arr) => $("#c"+ item).addClass('bingo'))
                     makeItRain();
                 }
             }
 
             function continueBingo() {
                 clearInterval(interval);
-                $("#bingo").addClass("hidden")
+                $("#bingo").addClass("hidden");
+                audio.pause();
             }
 
             $( document ).ready(function() {

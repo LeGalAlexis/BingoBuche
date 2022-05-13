@@ -1,3 +1,8 @@
+@font-face {
+    font-family: bingo;
+    src: url(./The\ Wild\ Breath\ of\ Zelda.otf);
+}
+
 html {
     background-color: #526870;
 }
@@ -25,6 +30,7 @@ html {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-gap: 5px;
     width: 48%;
+    position: relative;
 }
 
 .cell {
@@ -40,6 +46,13 @@ html {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     border: 1px solid black;
+}
+
+.cell-text {
+    background-color: #222;
+    color: white;
+    border-radius: 5px;
+    width: 100%;
 }
 
 .cell.selected {
@@ -59,17 +72,21 @@ html {
 .floating {
     position: absolute;
     width: 75px;
+    z-index: 3000;
 }
 
 .bingo-title {
-    position: fixed;
+    position: absolute;
     top: 250px;
-    font-size: 200px;
+    font-size: 150px;
     width: 100%;
     text-align: center;
     display: flex;
     justify-content: center;
-    background-color: rgba(255,255,255,0.6);
+    background-color: rgba(255,255,255,0.8);
+    z-index: 2000;
+    font-family: bingo;
+    animation: bingo-in 0.5s linear 0s 1 both;
 }
 
 .rotating {
@@ -94,4 +111,10 @@ html {
     from { transform: rotate(1deg) scale(0,0); }
     50% { transform: rotate(180deg) scale(1,1); }
     to { transform: rotate(360deg) scale(0,0); }
+}
+
+@keyframes bingo-in {
+    from { transform: scale(0, 0)}
+    50% { transform: scale(1, 0.05) }
+    to { transform: scale(1, 1)}
 }
