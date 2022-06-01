@@ -8,6 +8,7 @@ html {
 }
 .page {
     display: flex;
+    height: 100%;
 }
 
 .side-panel {
@@ -65,7 +66,7 @@ html {
 }
 
 .pop {
-    animation: fade-in 1s linear 0s 1 both;
+    animation: scale-in 1s linear 0s 1 both;
 }
 
 .floating {
@@ -100,13 +101,25 @@ html {
     display: none;
 }
 
+.animated-visible {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.5s linear;
+}
+
+.animated-hidden {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s 0.5s, opacity 0.5s linear;
+}
+
 @keyframes rotate {
     0% { transform: rotateY(0deg) scale(1.1, 1.1);}
     70% { transform: rotateY(400deg) scale(1.2, 1.2);}
     100% {transform: rotateY(360deg) scale(1.1, 1.1);}
 }
 
-@keyframes fade-in {
+@keyframes scale-in {
     from { transform: rotate(1deg) scale(0,0); }
     50% { transform: rotate(180deg) scale(1,1); }
     to { transform: rotate(360deg) scale(0,0); }
