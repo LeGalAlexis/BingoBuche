@@ -1,10 +1,10 @@
-<html>
+<html style="height: 100%;">
     <head>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <link rel="stylesheet" type="text/css" href="./style.css" />
         <script src="https://kit.fontawesome.com/92c9b58fa8.js" crossorigin="anonymous"></script>
     </head>
-    <body>
+    <body style="height: 100%;">
         <div class="page">
             <div class="container">
                 <div id="bingo" class="hidden bingo-title"><img src="./bubuchenewsub.gif"><span class="rotating"><span class="bingo-txt">BINGO</span><button onclick="continueBingo()">Continuer</button></span><img src="./bubuchenewsub.gif"></div>
@@ -38,6 +38,7 @@
                 <h1 class="title">Bingo Buche !</h1>
                 <p><img src="./wazotest2_112px.png" alt="wazo" class="wazo" ></p>
                 <button onClick="window.location.reload();">Creer un nouveau bingo</button>
+                <button onClick="setTransparencyMode()">Mode transparence</button>
                 <audio controls id="birdmachine" class="hidden">
                     <source src="./bird-machine-audio.mp3" type="audio/mp3">
                     Your browser does not support the audio element.
@@ -48,6 +49,7 @@
         
         <script>
             var interval;
+            var displayInterval;
             var hasAnimationBeenTriggered = false;
             var audio = document.getElementById("birdmachine"); 
             const cells = ["ça ken SALE", 
@@ -159,6 +161,44 @@
                 checkLine([0,6,12,18,24]);
                 checkLine([4,8,12,16,20]);
             });
+
+            var transparencyTrigger = false;
+
+            function setTransparencyMode() {
+                transparencyTrigger = !transparencyTrigger;
+                if(transparencyTrigger) {
+                    $("html").css('background-color', '#00FF00');
+                    startDisplayInterval();
+
+                    $(".container")
+                        .mouseenter(function(){
+                            $(".cell").removeClass('animated-hidden');
+                            $(".cell").addClass('animated-visible');
+                            clearInterval(displayInterval);
+                        })
+                        .mouseleave(function() {
+                            startDisplayInterval();
+                        })
+                } else {
+                    $("html").css('background-color', '#526870');
+                    $(".cell").removeClass('animated-hidden');
+                    $(".cell").addClass('animated-visible');
+                    clearInterval(displayInterval);
+                    $(".container").unbind("mouseenter");
+                    $(".container").unbind("mouseleave");
+                }
+            }
+
+            function startDisplayInterval() {
+                displayInterval = setInterval(
+                    function() {
+                        if ($('.container:hover').length === 0) {
+                            $(".cell").addClass('animated-hidden');
+                            $(".cell").removeClass('animated-visible');
+                        }
+                    }
+                , 1000)
+            }
         </script>
     </body>
 </html>
