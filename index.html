@@ -37,8 +37,23 @@
             <div class="side-panel">
                 <h1 class="title">Bingo Buche !</h1>
                 <p><img src="./wazotest2_112px.png" alt="wazo" class="wazo" ></p>
-                <button onClick="window.location.reload();">Creer un nouveau bingo</button>
-                <button onClick="setTransparencyMode()">Mode transparence</button>
+                <div class="controls">
+                    <div class="control-line">
+                        <button onClick="window.location.reload();">Creer un nouveau bingo</button>
+                    </div>
+                    <div class="control-line">
+                        <button onClick="setTransparencyMode()">Mode transparence</button>
+                    </div>
+                    <div class="control-line">
+                        <button onClick="share()">Partager</button>
+                        <span id="sharingFeedBack" style="color: white;"></span>
+                    </div>
+                    <div class="control-line">
+                        <input type="text" id="sharingInput" />
+                        <button onClick="setGridFromImport()">Importer</button>
+                    </div>
+                    
+                </div>
                 <audio controls id="birdmachine" class="hidden">
                     <source src="./bird-machine-audio.mp3" type="audio/mp3">
                     Your browser does not support the audio element.
@@ -52,30 +67,31 @@
             var displayInterval;
             var hasAnimationBeenTriggered = false;
             var audio = document.getElementById("birdmachine"); 
-            const cells = ["ça ken SALE", 
-                "musique trop épique", 
-                "animal en voie de disparition",
-                "timelapse nuages",
-                "combat contre les éléments",
-                "slowmo inutile",
-                "\"La nature reprend ses droits\"",
-                "entre tradition & modernité/terre de contrastes etc",
-                "baston pour la dominance",
-                "parade nuptiale chelou",
-                "bébé animal mignon",
-                "plan drone",
-                "licence poétique approximative",
-                "CACA",
-                "sound designer en roue libre",
-                "3D éclatée",
-                "sous titres inventent des applaudissements",
-                "l'eau, bien le plus précieux",
-                "écotourisme",
-                "le problème c'est nous",
-                "animal mignon se fait manger par un prédateur",
-                "métaphore filée claquée au sol",
-                "\"nature impitoyable\"",
-                "gros plan carcasse"];
+            var shareString;
+            const cells = [{ id:1, text:"ça ken SALE" }, 
+                { id:2, text:"musique trop épique" }, 
+                { id:3, text:"animal en voie de disparition" },
+                { id:4, text:"timelapse nuages" },
+                { id:5, text:"combat contre les éléments" },
+                { id:6, text:"slowmo inutile" },
+                { id:7, text:"\"La nature reprend ses droits\"" },
+                { id:8, text:"entre tradition & modernité/terre de contrastes etc" },
+                { id:9, text:"baston pour la dominance" },
+                { id:10, text:"parade nuptiale chelou" },
+                { id:11, text:"bébé animal mignon" },
+                { id:12, text:"plan drone" },
+                { id:13, text:"licence poétique approximative" },
+                { id:14, text:"CACA" },
+                { id:15, text:"sound designer en roue libre" },
+                { id:16, text:"3D éclatée" },
+                { id:17, text:"sous titres inventent des applaudissements" },
+                { id:18, text:"l'eau, bien le plus précieux" },
+                { id:19, text:"écotourisme" },
+                { id:20, text:"le problème c'est nous" },
+                { id:21, text:"animal mignon se fait manger par un prédateur" },
+                { id:22, text:"métaphore filée claquée au sol" },
+                { id:23, text:"\"nature impitoyable\"" },
+                { id:24, text:"gros plan carcasse" }];
 
             function shuffle(array) {
                 let currentIndex = array.length,  randomIndex;
@@ -96,14 +112,29 @@
             }
 
             function setCell(item, index, arr) {
-                $(".cell-"+ index).text(item)
+                $(".cell-"+ index).text(item.text)
             }
 
             function setGrid() {
                 let gridCells = [...cells];
                 shuffle(gridCells);
-                gridCells.splice(12, 0, "FREE SPACE");
+                shareString = gridCells.map(c => c.id).join(';');
+                gridCells.splice(12, 0, { id:0, text:"FREE SPACE" });
                 gridCells.forEach(setCell);
+            }
+
+            function setGridFromImport() {
+                let sharingString = $('#sharingInput').val();
+                $('#sharingInput').val("");
+                let gridCells = sharingString.split(';').map(id => cells.find(c => c.id == id));
+                gridCells.splice(12, 0, { id:0, text:"FREE SPACE" });
+                gridCells.forEach(setCell);
+            }
+
+            function share() {
+                navigator.clipboard.writeText(shareString);
+                $('#sharingFeedBack').text("Grille copiée dans le presse-papier !")
+                let textInterval = self.setInterval(function(){$('#sharingFeedBack').text(""); clearInterval(textInterval);},3000);
             }
 
             function isSelected(index) {

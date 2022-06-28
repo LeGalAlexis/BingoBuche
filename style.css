@@ -113,6 +113,17 @@ html {
     transition: visibility 0s 0.5s, opacity 0.5s linear;
 }
 
+.controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.control-line {
+    width: 50%;
+    text-align: left;
+}
+
 @keyframes rotate {
     0% { transform: rotateY(0deg) scale(1.1, 1.1);}
     70% { transform: rotateY(400deg) scale(1.2, 1.2);}
