@@ -4,7 +4,7 @@
 }
 
 html {
-    background-color: #526870;
+    background-color: #36393F;
 }
 .page {
     display: flex;
@@ -19,7 +19,6 @@ html {
 
 .title {
     color: #669491;
-    text-shadow: -10px 0 20px black, 0 10px 20px black, 10px 0 20px black, 0 -10px 20px black;
 }
 
 .wazo {
@@ -35,7 +34,7 @@ html {
 }
 
 .cell {
-    background-color: #403b2f;
+    background-color: #40444B;
     aspect-ratio: 1;
     text-align: center;
     font-size: 21px;
@@ -122,6 +121,15 @@ html {
 .control-line {
     width: 50%;
     text-align: left;
+}
+
+.credits {
+    color: white;
+    font-size: smaller;
+}
+
+.credits a {
+    color: white;
 }
 
 @keyframes rotate {

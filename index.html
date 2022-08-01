@@ -35,7 +35,7 @@
                 <div class="cell" id="c24"><span class="cell-text cell-24">test</span></div>
             </div>
             <div class="side-panel">
-                <h1 class="title">Bingo Buche !</h1>
+                <h1 class="title">Ⓑⓘⓝⓖⓞⓓⓞⓒⓤ</h1>
                 <p><img src="./wazotest2_112px.png" alt="wazo" class="wazo" ></p>
                 <div class="controls">
                     <div class="control-line">
@@ -52,7 +52,9 @@
                         <input type="text" id="sharingInput" />
                         <button onClick="setGridFromImport()">Importer</button>
                     </div>
-                    
+                    <div class="control-line">
+                        <p class="credits">Fait par <a href="https://github.com/LeGalAlexis/BingoBuche">Plogojowitz</a> pour le stream de <a href="https://www.twitch.tv/bubuchenbois">BubuchenBois</a></p>
+                    </div>
                 </div>
                 <audio controls id="birdmachine" class="hidden">
                     <source src="./bird-machine-audio.mp3" type="audio/mp3">
@@ -211,7 +213,7 @@
                             startDisplayInterval();
                         })
                 } else {
-                    $("html").css('background-color', '#526870');
+                    $("html").css('background-color', '#36393F');
                     $(".cell").removeClass('animated-hidden');
                     $(".cell").addClass('animated-visible');
                     clearInterval(displayInterval);
