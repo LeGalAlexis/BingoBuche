@@ -5,6 +5,9 @@
 
 html {
     background-color: #36393F;
+    background-image: url("./greenwood.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% auto;
 }
 .page {
     display: flex;

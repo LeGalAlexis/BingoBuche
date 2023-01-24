@@ -201,6 +201,7 @@
                 transparencyTrigger = !transparencyTrigger;
                 if(transparencyTrigger) {
                     $("html").css('background-color', '#00FF00');
+                    $("html").css('background-image', 'none');
                     startDisplayInterval();
 
                     $(".container")
@@ -214,6 +215,7 @@
                         })
                 } else {
                     $("html").css('background-color', '#36393F');
+                    $("html").css('background-image', 'url("./greenwood.jpg")');
                     $(".cell").removeClass('animated-hidden');
                     $(".cell").addClass('animated-visible');
                     clearInterval(displayInterval);
