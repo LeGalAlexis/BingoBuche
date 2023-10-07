@@ -71,11 +71,11 @@
             var audio = document.getElementById("birdmachine"); 
             var shareString;
             const cells = [{ id:1, text:"ça ken SALE" }, 
-                { id:2, text:"musique trop épique" }, 
-                { id:3, text:"animal en voie de disparition" },
+                { id:2, text:"musique incongrue" }, 
+                { id:3, text:"animal menacé/en voie de disparition" },
                 { id:4, text:"timelapse nuages" },
                 { id:5, text:"combat contre les éléments" },
-                { id:6, text:"slowmo inutile" },
+                { id:6, text:"cadreur en roue libre" },
                 { id:7, text:"\"La nature reprend ses droits\"" },
                 { id:8, text:"entre tradition & modernité/terre de contrastes/de tous temps.." },
                 { id:9, text:"BASTON" },
@@ -83,17 +83,17 @@
                 { id:11, text:"BEBOU" },
                 { id:12, text:"plan drone" },
                 { id:13, text:"licence poétique approximative / comparaison claquée au sol" },
-                { id:14, text:"CACA" },
+                { id:14, text:"CACA (ou pipi)" },
                 { id:15, text:"sound designer en roue libre" },
                 { id:16, text:"timelapse plante" },
                 { id:17, text:"narrateur cabotine" },
                 { id:18, text:"l'eau, bien le plus précieux" },
                 { id:19, text:"écotourisme" },
-                { id:20, text:"le problème c'est le capitalisme" },
+                { id:20, text:"j'suis dépaysé" },
                 { id:21, text:"animal se fait manger par un prédateur" },
                 { id:22, text:"anthropomorphisme" },
                 { id:23, text:"humain cringe" },
-                { id:24, text:"plan carcasse" }];
+                { id:24, text:"carcasse" }];
 
             function shuffle(array) {
                 let currentIndex = array.length,  randomIndex;
@@ -121,7 +121,7 @@
                 let gridCells = [...cells];
                 shuffle(gridCells);
                 shareString = gridCells.map(c => c.id).join(';');
-                gridCells.splice(12, 0, { id:0, text:"FREE SPACE" });
+                gridCells.splice(12, 0, { id:0, text:"le pb c'est le capitalisme-han" });
                 gridCells.forEach(setCell);
             }
 
@@ -129,7 +129,7 @@
                 let sharingString = $('#sharingInput').val();
                 $('#sharingInput').val("");
                 let gridCells = sharingString.split(';').map(id => cells.find(c => c.id == id));
-                gridCells.splice(12, 0, { id:0, text:"FREE SPACE" });
+                gridCells.splice(12, 0, { id:0, text:"le pb c'est le capitalisme-han" });
                 gridCells.forEach(setCell);
             }
 
